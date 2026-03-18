@@ -1,32 +1,32 @@
 name: Daily Brief
-
+ 
 on:
   schedule:
-    - cron: '0 7 * * *'   # 7:00 AM UTC daily — adjust to your timezone
-  workflow_dispatch:        # Manual trigger from GitHub UI
-
+    - cron: '0 7 * * *'   # Every day at 7:00 AM UTC — adjust to your timezone
+  workflow_dispatch:        # Allows you to trigger it manually from GitHub UI
+ 
 jobs:
   send-brief:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
+ 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
-
+ 
       - name: Set up Python
         uses: actions/setup-python@v5.4.0
         with:
           python-version: '3.11'
-
+ 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
+ 
       - name: Run Daily Brief
         env:
           GROQ_API_KEY:     ${{ secrets.GROQ_API_KEY }}
-          RESEND_API_KEY:   ${{ secrets.RESEND_API_KEY }}
           EMAIL_SENDER:     ${{ secrets.EMAIL_SENDER }}
+          BREVO_SMTP_KEY:   ${{ secrets.BREVO_SMTP_KEY }}
           EMAIL_RECIPIENT:  ${{ secrets.EMAIL_RECIPIENT }}
         run: python daily_brief.py
