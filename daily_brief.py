@@ -26,8 +26,8 @@ CONFIG = {
     "recency_hours":     24,
 
     "email": {
-        "smtp_user":  "resend",                        # Resend SMTP username is always "resend"
-        "sender":     os.environ["EMAIL_SENDER"],      # e.g. onboarding@resend.dev
+        "smtp_user":  "resend",                        # Resend SMTP username is always literally "resend"
+        "sender":     "onboarding@resend.dev",         # Resend's built-in test sender address
         "password":   os.environ["RESEND_API_KEY"],
         "recipient":  os.environ["EMAIL_RECIPIENT"],
         "smtp_host":  "smtp.resend.com",
