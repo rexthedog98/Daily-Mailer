@@ -239,7 +239,8 @@ def send_email(html: str, cfg: dict):
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL(cfg["smtp_host"], cfg["smtp_port"], context=context) as server:
-        server.login(cfg["smtp_user"], cfg["password"])   # login with "resend"
+        server.login(cfg["smtp_user"], cfg["password"])   
+        # login with "resend"
         server.sendmail(cfg["sender"], recipients, msg.as_string())  # send from real address
     print(f"\n  ✅  Brief sent to {len(recipients)} recipient(s)")
 
